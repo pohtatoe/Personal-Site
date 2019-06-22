@@ -1,0 +1,47 @@
+.projects {
+    margin-bottom: 10vh;
+    margin-top: 10vh;
+}
+mat-card {
+    margin: 3vh 5vw 3vh 5vw;
+    height: 15vh;
+    overflow: auto;
+    padding-top: 3vh;
+    padding-bottom: 1.75vh;
+    padding-left: 3vh;
+}
+mat-card-title {
+    font-family: "Garamond Smallcaps";
+    font-weight: 500;
+    /* font-style: italic; */
+    font-size: 4vh;
+    overflow: auto;
+}
+mat-card-title.smallTitle {
+    font-size: 3vh !important;
+}
+mat-card-subtitle {
+    font-family: "Garamond Smallcaps";
+    /* font-style: italic; */
+    /* font-weight: bold; */
+    font-size: 2.5vh;
+    margin-bottom: 1.5vh;
+}
+mat-card-subtitle.smallTitle {
+    font-size: 1.75vh;
+}
+mat-card-content {
+    font-family: Lisboa;
+    /* font-style: italic; */
+    font-weight: 700;
+    /* font-variant: small-caps; */
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    position: absolute;
+    bottom: 1.5vh;
+}
+
+p {
+    margin: 2.5vh auto 4vh 5vw;
+    color: gray;
+}

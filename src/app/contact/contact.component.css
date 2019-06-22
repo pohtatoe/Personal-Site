@@ -1,0 +1,30 @@
+.contactText {
+    display: block;
+    text-align: center;
+    top: 2.15vh;
+    position: relative;
+    font-family: Garamond;
+    font-weight: 700;
+    font-size: 2.15vh;
+    margin-left: calc(7vh + 3vw);
+}
+.contactIcon {
+    margin-left: 9vw;
+    top: calc(2.5vh + 23px);
+    position: relative;
+    font-size: 2.15vh;
+}
+.contactBlock {
+    display: block;
+    position: absolute;
+    width: 40vw;
+    left: 27.5vw;
+    right: 32.5vw;  
+    top: 10vh;
+}
+a.contactText:link {
+    color: black;
+}
+a.contactText:visited {
+    color: black;
+}

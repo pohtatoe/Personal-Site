@@ -1,0 +1,8 @@
+.centerNavBar {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    -webkit-flex: 1, 0.5, initial; /* Safari 6.1+ */
+    -ms-flex: 1, 0.5, initial; /* IE 10 */ 
+    flex: 1, 0.5, initial;
+}
