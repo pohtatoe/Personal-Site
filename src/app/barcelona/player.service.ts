@@ -27,11 +27,11 @@ export class PlayerService {
     { id: 24, name: 'Mathieu', role: 'Defender' },
     { id: 25, name: 'Masip', role: 'Goalkeeper' },
   );
-  
+
   getPlayers(): Player[] {
     return this.players;
   }
-  
+
   getPlayer(id: number): Player {
     return this.players.filter(player => player.id === id)[0];
   }

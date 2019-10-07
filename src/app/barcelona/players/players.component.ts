@@ -9,6 +9,7 @@ import { PlayerService } from '@src/app/barcelona/player.service';
 })
 export class PlayersComponent implements OnInit {
   players: Player[];
+  links: String[] = ['Home'];
 
   constructor(private playerService: PlayerService) { }
 
