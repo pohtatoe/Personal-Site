@@ -128,8 +128,5 @@
     "@schematics/angular:component": {
       "styleext": "scss"
     }
-  },
-  "cli": {
-    "defaultCollection": "@nativescript/schematics"
   }
 }
