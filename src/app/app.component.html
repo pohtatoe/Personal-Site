@@ -1,6 +1,6 @@
 <div class="centerNavBar">
   <nav mat-tab-nav-bar>
-      <a mat-tab-link
+      <a mat-tab-link matRipple 
         *ngFor="let link of navLinks"
         [routerLink]="link.path"
         (click)="activeLink = link"
@@ -9,4 +9,7 @@
       </a>
   </nav>
 </div>
+<button mat-icon-button matRipple (click)="this.openBottomSheet()">
+  <mat-icon svgIcon="color-palette">color-palette</mat-icon>
+</button>
 <router-outlet></router-outlet>

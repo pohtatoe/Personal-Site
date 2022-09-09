@@ -1003,7 +1003,7 @@
 
 <ng-template #appTS>
 <!-- HTML generated using hilite.me -->
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">    1
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
     2
     3
     4
@@ -1012,49 +1012,116 @@
     7
     8
     9
-    10
-    11
-    12
-    13
-    14
-    15
-    16
-    17
-    18
-    19
-    20
-    21
-    22
-    23</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">
-    import</span> {{"{"}} <span style="color: #333399; font-weight: bold">Component</span> {{"}"}} <span style="color: #008800; font-weight: bold">from</span> <span style="background-color: #fff0f0">&#39;@angular/core&#39;</span>;
-    <span style="color: #008800; font-weight: bold">import</span> {{"{"}} <span style="color: #333399; font-weight: bold">NavLink</span> {{"}"}} <span style="color: #008800; font-weight: bold">from</span> <span style="background-color: #fff0f0">&#39;./NavLink&#39;</span>;
-    
-    <span style="color: #dcd079;">@Component</span>({{"{"}}
-        <span style="color: #8cdcdb">selector</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;app-root&#39;</span>,
-        <span style="color: #8cdcdb">templateUrl</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;./app.component.html&#39;</span>,
-        <span style="color: #8cdcdb">styleUrls</span><span style="color: #333333">:</span> [<span style="background-color: #fff0f0">&#39;./app.component.css&#39;</span>]
-    {{"}"}})
-    <span style="color: #008800; font-weight: bold">export</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #333399; font-weight: bold">AppComponent</span> {{"{"}}
-    
-        <span style="color: #8cdcdb">activeLink</span>: <span style="color: #333399; font-weight: bold">NavLink</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span>;
-    
-        <span style="color: #888888">// NavLink objects will be used to populate this component&#39;s routerLinks, which are nested in the navbar tabs</span>
-        <span style="color: #888888">// In other words, to change the site&#39;s Home Menu links, add new routes here (in addition to within the app-routing.module)</span>
-        <span style="color: #8cdcdb">navLinks</span>: <span style="color: #333399; font-weight: bold">NavLink</span>[] <span style="color: #333333">=</span> [
-        {{"{"}}<span style="color: #8cdcdb">path</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/bio&#39;</span>, <span style="color: #8cdcdb">label</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;About Me&#39;</span>{{"}"}},
-        {{"{"}}<span style="color: #8cdcdb">path</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/code&#39;</span>, <span style="color: #8cdcdb">label</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Code&#39;</span>{{"}"}},
-        {{"{"}}<span style="color: #8cdcdb">path</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/projects&#39;</span>, <span style="color: #8cdcdb">label</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Projects&#39;</span>{{"}"}},
-        <span style="color: #888888">// {{"{"}}path: &#39;/articles&#39;, label: &#39;Articles&#39;{{"}"}},</span>
-        {{"{"}}<span style="color: #8cdcdb">path</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/contact&#39;</span>, <span style="color: #8cdcdb">label</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Contact&#39;</span>{{"}"}},
-        ];
-    
-    {{"}"}}
-    </pre></td></tr></table></div>
+   10
+   11
+   12
+   13
+   14
+   15
+   16
+   17
+   18
+   19
+   20
+   21
+   22
+   23
+   24
+   25
+   26
+   27
+   28
+   29
+   30
+   31
+   32
+   33
+   34
+   35
+   36
+   37
+   38
+   39
+   40
+   41
+   42
+   43
+   44
+   45
+   46
+   47
+   48
+   49
+   50
+   51
+   52
+   53
+   54
+   55
+   56
+   57</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> {{"{"}} Component, Inject, Renderer2  {{"}"}} from <span style="background-color: #fff0f0">&#39;@angular/core&#39;</span>;
+   <span style="color: #008800; font-weight: bold">import</span> {{"{"}} DOCUMENT {{"}"}} from <span style="background-color: #fff0f0">&#39;@angular/common&#39;</span>;
+   <span style="color: #008800; font-weight: bold">import</span> {{"{"}} MatBottomSheet, MatBottomSheetRef {{"}"}} from <span style="background-color: #fff0f0">&#39;@angular/material&#39;</span>;
+   <span style="color: #008800; font-weight: bold">import</span> {{"{"}} GlobalsService {{"}"}} from <span style="background-color: #fff0f0">&#39;./globals.service&#39;</span>;
+   <span style="color: #008800; font-weight: bold">import</span> {{"{"}} NavLink {{"}"}} from <span style="background-color: #fff0f0">&#39;./NavLink&#39;</span>;
+   
+   <span style="color: #FF0000; background-color: #FFAAAA">@</span>Component({{"{"}}
+     selector<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;app-root&#39;</span>,
+     templateUrl<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;./app.component.html&#39;</span>,
+     styleUrls<span style="color: #333333">:</span> [<span style="background-color: #fff0f0">&#39;./app.component.css&#39;</span>]
+   {{"}"}})
+   <span style="color: #008800; font-weight: bold">export</span> <span style="color: #008800; font-weight: bold">class</span> AppComponent {{"{"}}
+     
+     theme:<span style="color: #333399; font-weight: bold">string</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;default&#39;</span>;
+   
+     <span style="color: #008800; font-weight: bold">constructor</span>(<span style="color: #008800; font-weight: bold">private</span> bottomSheet: <span style="color: #333399; font-weight: bold">MatBottomSheet</span>) {{"{"}}}
+     
+     openBottomSheet()<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">void</span> {{"{"}}
+       <span style="color: #008800; font-weight: bold">this</span>.bottomSheet.open(ThemeBottomSheet);
+     {{"}"}}
+   
+     activeLink: <span style="color: #333399; font-weight: bold">NavLink</span> <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span>;
+   
+     <span style="color: #888888">// NavLink objects will be used to populate this component&#39;s routerLinks, which are nested in the navbar tabs</span>
+     <span style="color: #888888">// In other words, to change the site&#39;s Home Menu links, add new routes here (in addition to within the app-routing.module)</span>
+     navLinks: <span style="color: #333399; font-weight: bold">NavLink</span>[] <span style="color: #333333">=</span> [
+       {{"{"}}path<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/bio&#39;</span>, label<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;About Me&#39;</span>},
+       {{"{"}}path<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/code&#39;</span>, label<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Code&#39;</span>},
+       {{"{"}}path<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/projects&#39;</span>, label<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Projects&#39;</span>},
+       <span style="color: #888888">// {{"{"}}path: &#39;/articles&#39;, label: &#39;Articles&#39;},</span>
+       {{"{"}}path<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;/contact&#39;</span>, label<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Contact&#39;</span>},
+     ];
+   
+   {{"}"}}
+   
+   <span style="color: #FF0000; background-color: #FFAAAA">@</span>Component({{"{"}}
+     selector<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;theme-bottom-sheet&#39;</span>,
+     templateUrl<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;theme-bottom-sheet.html&#39;</span>,
+   {{"}"}})
+   <span style="color: #008800; font-weight: bold">export</span> <span style="color: #008800; font-weight: bold">class</span> ThemeBottomSheet {{"{"}}
+     
+     <span style="color: #008800; font-weight: bold">constructor</span>(<span style="color: #008800; font-weight: bold">private</span> bottomSheetRef: <span style="color: #333399; font-weight: bold">MatBottomSheetRef</span><span style="color: #333333">&lt;</span>ThemeBottomSheet<span style="color: #333333">&gt;</span>, <span style="color: #008800; font-weight: bold">private</span> globalsService: <span style="color: #333399; font-weight: bold">GlobalsService</span>, <span style="color: #FF0000; background-color: #FFAAAA">@</span>Inject(DOCUMENT) <span style="color: #008800; font-weight: bold">private</span> <span style="color: #007020">document</span><span style="color: #333333">:</span> Document,
+     <span style="color: #008800; font-weight: bold">private</span> renderer: <span style="color: #333399; font-weight: bold">Renderer2</span>) {{"{"}}}
+   
+     theme <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;default&quot;</span>;
+   
+     openLink(event: <span style="color: #333399; font-weight: bold">MouseEvent</span>)<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">void</span> {{"{"}}
+       <span style="color: #008800; font-weight: bold">this</span>.bottomSheetRef.dismiss();
+       event.preventDefault();
+     {{"}"}}
+   
+     changeTheme(value: <span style="color: #333399; font-weight: bold">string</span>)<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">void</span> {{"{"}}
+       <span style="color: #008800; font-weight: bold">this</span>.renderer.removeClass(<span style="color: #008800; font-weight: bold">this</span>.<span style="color: #007020">document</span>.body, <span style="color: #008800; font-weight: bold">this</span>.globalsService.theme);
+       <span style="color: #008800; font-weight: bold">this</span>.globalsService.theme <span style="color: #333333">=</span> value;
+       <span style="color: #008800; font-weight: bold">this</span>.renderer.addClass(<span style="color: #008800; font-weight: bold">this</span>.<span style="color: #007020">document</span>.body, value);
+     {{"}"}}
+   {{"}"}}
+   </pre></td></tr></table></div>   
 </ng-template>   
 
 <ng-template #appHTML>
 <!-- HTML generated using hilite.me -->
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">    1
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
     2
     3
     4
@@ -1063,22 +1130,27 @@
     7
     8
     9
-    10
-    11
-    12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">
-    &lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0; color: #ce9178;">&quot;centerNavBar&quot;</span><span style="color: #007700">&gt;</span>
-        <span style="color: #007700">&lt;nav</span> <span style="color: #0000CC">mat-tab-nav-bar</span><span style="color: #007700">&gt;</span>
-            <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">mat-tab-link</span>
-            <span style="color: #0000CC">*ngFor=</span><span style="background-color: #fff0f0; color: #ce9178;">&quot;let link of navLinks&quot;</span>
-            <span style="color: #0000CC">[routerLink]=</span><span style="background-color: #fff0f0; color: #ce9178;">&quot;link.<span style="color: #8cdcdb">path</span>&quot;</span>
-            <span style="color: #0000CC">(click)=</span><span style="background-color: #fff0f0; color: #ce9178;">&quot;activeLink = link&quot;</span>
-            <span style="color: #0000CC">[active]=</span><span style="background-color: #fff0f0; color: #ce9178;">&quot;activeLink == link&quot;</span><span style="color: #007700">&gt;</span>
-                {{"{"}}{{"{"}}link.<span style="color: #8cdcdb">label</span>{{"}"}}{{"}"}}
-            <span style="color: #007700">&lt;/a&gt;</span>
-        <span style="color: #007700">&lt;/nav&gt;</span>
-    <span style="color: #007700">&lt;/div&gt;</span>
-    <span style="color: #007700">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
-    </pre></td></tr></table></div>       
+   10
+   11
+   12
+   13
+   14
+   15</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;centerNavBar&quot;</span><span style="color: #007700">&gt;</span>
+     <span style="color: #007700">&lt;nav</span> <span style="color: #0000CC">mat-tab-nav-bar</span><span style="color: #007700">&gt;</span>
+         <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">mat-tab-link</span> <span style="color: #0000CC">matRipple</span> 
+           <span style="color: #FF0000;">*</span><span style="color: #0000CC">ngFor=</span><span style="background-color: #fff0f0">&quot;let link of navLinks&quot;</span>
+           <span style="color: #FF0000;">[</span><span style="color: #0000CC">routerLink</span><span style="color: #FF0000;">]=</span><span style="background-color: #fff0f0">&quot;<span style="color: #0000CC">link</span>.<span style="color: #0000CC">path&quot;</span></span>
+           <span style="color: #FF0000;">(</span><span style="color: #0000CC">click</span><span style="color: #FF0000;">)=</span><span style="background-color: #fff0f0">&quot;<span style="color: #0000CC">activeLink = link&quot;</span></span>
+           <span style="color: #FF0000;">[</span><span style="color: #0000CC">active</span><span style="color: #FF0000;">]=</span><span style="background-color: #fff0f0">&quot;<span style="color: #0000CC">activeLink == link</span>&quot;</span><span style="color: #007700">&gt;</span>
+           {{"{"}}{{"{"}}link.label{{"}"}}{{"}"}}
+         <span style="color: #007700">&lt;/a&gt;</span>
+     <span style="color: #007700">&lt;/nav&gt;</span>
+   <span style="color: #007700">&lt;/div&gt;</span>
+   <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">mat-icon-button</span> <span style="color: #0000CC">matRipple</span> <span style="color: #FF0000;">(</span><span style="color: #0000CC">click</span><span style="color: #FF0000;">)=&quot;</span><span style="color: #0000CC">this</span>.<span style="color: #0000CC">openBottomSheet</span><span style="color: #FF0000;">()&quot;</span><span style="color: #007700">&gt;</span>
+     <span style="color: #007700">&lt;mat-icon</span> <span style="color: #0000CC">svgIcon=</span><span style="background-color: #fff0f0">&quot;color-palette&quot;</span><span style="color: #007700">&gt;</span>color-palette<span style="color: #007700">&lt;/mat-icon&gt;</span>
+   <span style="color: #007700">&lt;/button&gt;</span>
+   <span style="color: #007700">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
+   </pre></td></tr></table></div>
 </ng-template>
 
 
@@ -1147,8 +1219,8 @@
 
 
 <ng-template #stylesSCSS>
-    <!-- HTML generated using hilite.me -->
-    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">    1
+<!-- HTML generated using hilite.me -->
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">  1
     2
     3
     4
@@ -1157,178 +1229,290 @@
     7
     8
     9
-    10
-    11
-    12
-    13
-    14
-    15
-    16
-    17
-    18
-    19
-    20
-    21
-    22
-    23
-    24
-    25
-    26
-    27
-    28
-    29
-    30
-    31
-    32
-    33
-    34
-    35
-    36
-    37
-    38
-    39
-    40
-    41
-    42
-    43
-    44
-    45
-    46
-    47
-    48
-    49
-    50
-    51
-    52
-    53
-    54
-    55
-    56
-    57
-    58
-    59
-    60
-    61
-    62
-    63
-    64
-    65
-    66
-    67
-    68
-    69
-    70
-    71
-    72
-    73
-    74
-    75
-    76
-    77
-    78
-    79
-    80
-    81
-    82
-    83
-    84
-    85
-    86
-    87
-    88
-    89
-    90
-    91</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/* You can add global styles to this file, and also import other style files */</span>
-
-    <span style="color: #888888">/* The following is a default theme for Angular Material, which I use for stylized and animated interface components*/</span>
-    <span style="color: #008800; font-weight: bold">@import</span> <span style="background-color: #fff0f0">&quot;~@angular/material/prebuilt-themes/indigo-pink.css&quot;</span>;
-
-    <span style="color: #888888">/* The following is an imported font file, and its associated bold and/or italic versions */</span>
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Lisboa;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/LisboaSansOSF.otf)</span>;
+   10
+   11
+   12
+   13
+   14
+   15
+   16
+   17
+   18
+   19
+   20
+   21
+   22
+   23
+   24
+   25
+   26
+   27
+   28
+   29
+   30
+   31
+   32
+   33
+   34
+   35
+   36
+   37
+   38
+   39
+   40
+   41
+   42
+   43
+   44
+   45
+   46
+   47
+   48
+   49
+   50
+   51
+   52
+   53
+   54
+   55
+   56
+   57
+   58
+   59
+   60
+   61
+   62
+   63
+   64
+   65
+   66
+   67
+   68
+   69
+   70
+   71
+   72
+   73
+   74
+   75
+   76
+   77
+   78
+   79
+   80
+   81
+   82
+   83
+   84
+   85
+   86
+   87
+   88
+   89
+   90
+   91
+   92
+   93
+   94
+   95
+   96
+   97
+   98
+   99
+  100
+  101
+  102
+  103
+  104
+  105
+  106
+  107
+  108
+  109
+  110
+  111
+  112
+  113
+  114
+  115
+  116
+  117
+  118
+  119
+  120
+  121
+  122
+  123
+  124
+  125
+  126
+  127
+  128
+  129
+  130
+  131
+  132
+  133
+  134
+  135
+  136
+  137
+  138
+  139
+  140
+  141
+  142
+  143
+  144
+  145
+  146
+  147</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic">/* You can add global styles to this file, and also import other style files */</span>
+  
+  <span style="color: #008800; font-style: italic">/* The following is a default theme for Angular Material, which I use for stylized and animated interface components*/</span>
+  <span style="color: #AA22FF; font-weight: bold">@import</span> <span style="color: #BB4444">&quot;~@angular/material/prebuilt-themes/indigo-pink.css&quot;</span>;
+  
+  <span style="color: #008800; font-style: italic">// Import Font-Awesome</span>
+  <span style="color: #008800; font-style: italic">// @import &#39;font-awesome&#39;;</span>
+  <span style="color: #008800; font-style: italic">// @import &#39;~font-awesome/scss/font-awesome&#39;;</span>
+  
+  <span style="color: #008800; font-style: italic">/* The following is an imported font file, and its associated bold and/or italic versions */</span>
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Lisboa;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/LisboaSansOSF.otf)</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Lisboa;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/LisboaSansOSF-Bold.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">700</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Lisboa;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/LisboaSansOSF-Italic.otf)</span>;
+      <span style="color: #BB4444">font-style</span><span style="color: #666666">:</span> <span style="color: #880000">italic</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Lisboa;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/LisboaSansOSF-BoldItalic.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">700</span>;
+      <span style="color: #BB4444">font-style</span><span style="color: #666666">:</span> <span style="color: #880000">italic</span>;
+  {{"}"}}
+  
+  <span style="color: #008800; font-style: italic">/* The following is an imported font file, and its associated bold and/or italic versions */</span>
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Garamond;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/AGaramond-Regular.otf)</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Garamond;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/AGaramond-Semibold.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">700</span>;
+      <span style="color: #BB4444">font-variant</span><span style="color: #666666">:</span> <span style="color: #880000">normal</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Garamond;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/AGaramond-Bold.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">900</span>;
+      <span style="color: #BB4444">font-variant</span><span style="color: #666666">:</span> <span style="color: #880000">normal</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Garamond;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/AGaramond-ItalicOsF.otf)</span>;
+      <span style="color: #BB4444">font-style</span><span style="color: #666666">:</span> <span style="color: #880000">italic</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Garamond;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/AGaramond-SemiboldItalicOsF.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">700</span>;
+      <span style="color: #BB4444">font-style</span><span style="color: #666666">:</span> <span style="color: #880000">italic</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> Garamond;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets/AGaramond-BoldItalicOsF.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">900</span>;
+      <span style="color: #BB4444">font-style</span><span style="color: #666666">:</span> <span style="color: #880000">italic</span>;
+  {{"}"}}
+  <span style="color: #008800; font-style: italic">// Declaring smallcaps fonts must be done in a separate font-family (strange to me...)</span>
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;Garamond Smallcaps&quot;</span>;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets\AGaramond-RegularSC.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">400</span>;
+  {{"}"}}
+  <span style="color: #AA22FF; font-weight: bold">@font-face</span> {{"{"}}
+      <span style="color: #BB4444">font-family</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;Garamond Smallcaps&quot;</span>;
+      <span style="color: #BB4444">src</span><span style="color: #666666">:</span> <span style="color: #008000">url(assets\AGaramond-SemiboldSC.otf)</span>;
+      <span style="color: #BB4444">font-weight</span><span style="color: #666666">:</span> <span style="color: #666666">700</span>;
+  {{"}"}}
+  
+  <span style="color: #008000; font-weight: bold">html</span><span style="color: #666666">,</span> <span style="color: #008000; font-weight: bold">body</span> {{"{"}} <span style="color: #BB4444">overflow-x</span><span style="color: #666666">:</span> <span style="color: #880000">hidden</span>;}
+  
+  <span style="color: #008000; font-weight: bold">body</span> {{"{"}}
+      <span style="color: #BB4444">background-repeat</span><span style="color: #666666">:</span> <span style="color: #880000">no-repeat</span>;
+      <span style="color: #BB4444">background-attachment</span><span style="color: #666666">:</span> <span style="color: #880000">fixed</span>;
+      <span style="color: #008800; font-style: italic">// background-color: #7f5a83;</span>
+      <span style="color: #008800; font-style: italic">// background-image: linear-gradient(to bottom right, #7f5a83 0%, #0d324d 74%);    </span>
+      <span style="color: #008800; font-style: italic">// background-color:  #fce043;</span>
+      <span style="color: #008800; font-style: italic">// background-image: linear-gradient(to bottom right,  #fce043 0% , #fb7ba2 74%);</span>
+      <span style="color: #BB4444">background-color</span><span style="color: #666666">:</span> <span style="color: #666666">#d9e4f5</span>;
+  {{"}"}}
+  
+  <span style="color: #008000; font-weight: bold">body</span><span style="color: #0000FF">.defaultTheme</span> {{"{"}}
+      <span style="color: #BB4444">background-image</span><span style="color: #666666">:</span> <span style="color: #00A000">linear-gradient</span>(<span style="color: #666666">315</span><span style="color: #00BB00; font-weight: bold">deg</span><span style="color: #666666">,</span> <span style="color: #666666">#d9e4f5</span> <span style="color: #666666">0</span><span style="color: #00BB00; font-weight: bold">%</span><span style="color: #666666">,</span> <span style="color: #666666">#a9b3e9</span> <span style="color: #666666">74</span><span style="color: #00BB00; font-weight: bold">%</span>);
+  {{"}"}}
+  
+  <span style="color: #008000; font-weight: bold">body</span><span style="color: #0000FF">.greenTheme</span> {{"{"}}
+      <span style="color: #BB4444">background-image</span><span style="color: #666666">:</span> <span style="color: #00A000">linear-gradient</span>(<span style="color: #666666">315</span><span style="color: #00BB00; font-weight: bold">deg</span><span style="color: #666666">,</span> <span style="color: #666666">#d9e4f5</span> <span style="color: #666666">0</span><span style="color: #00BB00; font-weight: bold">%</span><span style="color: #666666">,</span> <span style="color: #666666">#a0e8c6</span> <span style="color: #666666">74</span><span style="color: #00BB00; font-weight: bold">%</span>);
+  {{"}"}}
+  
+  <span style="color: #008000; font-weight: bold">body</span><span style="color: #0000FF">.redTheme</span> {{"{"}}
+      <span style="color: #BB4444">background-image</span><span style="color: #666666">:</span> <span style="color: #00A000">linear-gradient</span>(<span style="color: #666666">315</span><span style="color: #00BB00; font-weight: bold">deg</span><span style="color: #666666">,</span> <span style="color: #666666">#d9e4f5</span> <span style="color: #666666">0</span><span style="color: #00BB00; font-weight: bold">%</span><span style="color: #666666">,</span> <span style="color: #666666">#e8a4b1</span> <span style="color: #666666">74</span><span style="color: #00BB00; font-weight: bold">%</span>);
+  {{"}"}}
+  
+  <span style="color: #0000FF">.downloadButton.mat-button</span>{{"{"}}
+      <span style="color: #BB4444">background-color</span><span style="color: #666666">:</span> <span style="color: #666666">#3ee577</span>;
+      <span style="color: #BB4444">background-image</span><span style="color: #666666">:</span> <span style="color: #00A000">linear-gradient</span>(<span style="color: #666666">315</span><span style="color: #00BB00; font-weight: bold">deg</span><span style="color: #666666">,#3ee577</span> <span style="color: #666666">0</span><span style="color: #00BB00; font-weight: bold">%</span><span style="color: #666666">,</span>  <span style="color: #666666">#42fcdb</span> <span style="color: #666666">74</span><span style="color: #00BB00; font-weight: bold">%</span>);
+      <span style="color: #BB4444">width</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>(<span style="color: #666666">2</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">5</span><span style="color: #00BB00; font-weight: bold">vw</span>);
+      <span style="color: #BB4444">height</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>(<span style="color: #666666">.1</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">2</span><span style="color: #00BB00; font-weight: bold">vw</span>);
+      <span style="color: #BB4444">line-height</span><span style="color: #666666">:</span> <span style="color: #666666">20</span><span style="color: #00BB00; font-weight: bold">px</span>;
+      <span style="color: #BB4444">min-height</span><span style="color: #666666">:</span> <span style="color: #666666">25</span><span style="color: #00BB00; font-weight: bold">px</span>;
+      <span style="color: #BB4444">min-width</span><span style="color: #666666">:</span> <span style="color: #666666">50</span><span style="color: #00BB00; font-weight: bold">px</span>;
+      <span style="color: #BB4444">vertical-align</span><span style="color: #666666">:</span> <span style="color: #880000">center</span>;
+      <span style="color: #BB4444">font-size</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>(<span style="color: #666666">1.2</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">.35</span><span style="color: #00BB00; font-weight: bold">vw</span>);
+      <span style="color: #BB4444">padding</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>((<span style="color: #666666">.1</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">2</span><span style="color: #00BB00; font-weight: bold">vw</span>)<span style="color: #666666">/5</span>) <span style="color: #666666">0</span>;
+      <span style="color: #BB4444">margin</span><span style="color: #666666">:</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>;  
+  {{"}"}}
+  
+  <span style="color: #0000FF">.linkButton.mat-button</span>{{"{"}}
+      <span style="color: #BB4444">background-color</span><span style="color: #666666">:</span> <span style="color: #666666">#63a4ff</span>;
+      <span style="color: #BB4444">background-image</span><span style="color: #666666">:</span> <span style="color: #00A000">linear-gradient</span>(<span style="color: #666666">315</span><span style="color: #00BB00; font-weight: bold">deg</span><span style="color: #666666">,</span> <span style="color: #666666">#63a4ff</span> <span style="color: #666666">0</span><span style="color: #00BB00; font-weight: bold">%</span><span style="color: #666666">,</span> <span style="color: #666666">#83eaf1</span> <span style="color: #666666">74</span><span style="color: #00BB00; font-weight: bold">%</span>);
+      <span style="color: #BB4444">width</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>(<span style="color: #666666">.1</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">3.4</span><span style="color: #00BB00; font-weight: bold">vw</span>);
+      <span style="color: #BB4444">height</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>(<span style="color: #666666">.1</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">2</span><span style="color: #00BB00; font-weight: bold">vw</span>);
+      <span style="color: #BB4444">line-height</span><span style="color: #666666">:</span> <span style="color: #666666">20</span><span style="color: #00BB00; font-weight: bold">px</span>;
+      <span style="color: #BB4444">min-height</span><span style="color: #666666">:</span> <span style="color: #666666">25</span><span style="color: #00BB00; font-weight: bold">px</span>;
+      <span style="color: #BB4444">min-width</span><span style="color: #666666">:</span> <span style="color: #666666">30</span><span style="color: #00BB00; font-weight: bold">px</span>;
+      <span style="color: #BB4444">vertical-align</span><span style="color: #666666">:</span> <span style="color: #880000">center</span>;
+      <span style="color: #BB4444">font-size</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>(<span style="color: #666666">1.2</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">.35</span><span style="color: #00BB00; font-weight: bold">vw</span>);
+      <span style="color: #BB4444">padding</span><span style="color: #666666">:</span> <span style="color: #00A000">calc</span>((<span style="color: #666666">.1</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #666666">+</span> <span style="color: #666666">2</span><span style="color: #00BB00; font-weight: bold">vw</span>)<span style="color: #666666">/5</span>) <span style="color: #666666">0</span>;
+      <span style="color: #BB4444">margin</span><span style="color: #666666">:</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>;
+  {{"}"}}
+  
+  <span style="color: #008800; font-style: italic">// temporary fix for expansion panels until Angular Material Issue is fixed,</span>
+  <span style="color: #008800; font-style: italic">// see https://github.com/angular/material2/issues/13870</span>
+  <span style="color: #008000; font-weight: bold">mat-expansion-panel</span> {{"{"}}
+    <span style="color: #008000; font-weight: bold">mat-expansion-panel-header</span> {{"{"}}
+      <span style="color: #BB4444">height</span><span style="color: #666666">:</span> <span style="color: #666666">12</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #B8860B">!important</span>; <span style="color: #008800; font-style: italic">// height may be different for you</span>
     {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Lisboa;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/LisboaSansOSF-Bold.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">700</span>;
+    <span style="color: #0000FF">.mat-expansion-panel-content</span> {{"{"}}
+      <span style="color: #BB4444">height</span><span style="color: #666666">:</span> <span style="color: #666666">0</span>;
     {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Lisboa;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/LisboaSansOSF-Italic.otf)</span>;
-        <span style="color: #0000CC">font-style</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">italic</span>;
+    <span style="color: #AA22FF; font-weight: bold">&amp;</span><span style="color: #0000FF">.mat-expanded</span> {{"{"}}
+      <span style="color: #008000; font-weight: bold">mat-expansion-panel-header</span> {{"{"}}
+        <span style="color: #BB4444">height</span><span style="color: #666666">:</span> <span style="color: #666666">12</span><span style="color: #00BB00; font-weight: bold">vh</span> <span style="color: #B8860B">!important</span>; <span style="color: #008800; font-style: italic">// height may be different for you</span>
+      {{"}"}}
+      <span style="color: #0000FF">.mat-expansion-panel-content</span> {{"{"}}
+        <span style="color: #BB4444">height</span><span style="color: #666666">:</span> <span style="color: #880000">auto</span>;
+      {{"}"}}
     {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Lisboa;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/LisboaSansOSF-BoldItalic.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">700</span>;
-        <span style="color: #0000CC">font-style</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">italic</span>;
-    {{"}"}}
-
-    <span style="color: #888888">/* The following is an imported font file, and its associated bold and/or italic versions */</span>
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Garamond;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/AGaramond-Regular.otf)</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Garamond;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/AGaramond-Semibold.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">700</span>;
-        <span style="color: #0000CC">font-variant</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">normal</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Garamond;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/AGaramond-Bold.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">900</span>;
-        <span style="color: #0000CC">font-variant</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">normal</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Garamond;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/AGaramond-ItalicOsF.otf)</span>;
-        <span style="color: #0000CC">font-style</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">italic</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Garamond;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/AGaramond-SemiboldItalicOsF.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">700</span>;
-        <span style="color: #0000CC">font-style</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">italic</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> Garamond;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets/AGaramond-BoldItalicOsF.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">900</span>;
-        <span style="color: #0000CC">font-style</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">italic</span>;
-    {{"}"}}
-    <span style="color: #888888">// Declaring smallcaps fonts must be done in a separate font-family (strange to me...)</span>
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Garamond Smallcaps&quot;</span>;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets\AGaramond-RegularSC.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">400</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">@font-face</span> {{"{"}}
-        <span style="color: #0000CC">font-family</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Garamond Smallcaps&quot;</span>;
-        <span style="color: #0000CC">src</span><span style="color: #333333">:</span> <span style="color: #DD2200; background-color: #fff0f0">url(assets\AGaramond-SemiboldSC.otf)</span>;
-        <span style="color: #0000CC">font-weight</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">700</span>;
-    {{"}"}}
-
-    <span style="color: #888888">// temporary fix for expansion panels until Angular Material Issue is fixed,</span>
-    <span style="color: #888888">// see https://github.com/angular/material2/issues/13870</span>
-    <span style="color: #007700">mat-expansion-panel</span> {{"{"}}
-    <span style="color: #007700">mat-expansion-panel-header</span> {{"{"}}
-        <span style="color: #0000CC">height</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">48</span><span style="color: #333399; font-weight: bold">px</span>; <span style="color: #888888">// height may be different for you</span>
-    {{"}"}}
-    <span style="color: #BB0066; font-weight: bold">.mat-expansion-panel-content</span> {{"{"}}
-        <span style="color: #0000CC">height</span><span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">0</span>;
-    {{"}"}}
-    <span style="color: #008800; font-weight: bold">&amp;</span><span style="color: #BB0066; font-weight: bold">.mat-expanded</span> {{"{"}}
-        <span style="color: #007700">mat-expansion-panel-header</span> {{"{"}}
-        <span style="color: #888888">//height: 64px; // height may be different for you</span>
-        {{"}"}}
-        <span style="color: #BB0066; font-weight: bold">.mat-expansion-panel-content</span> {{"{"}}
-        <span style="color: #0000CC">height</span><span style="color: #333333">:</span> <span style="color: #003366; font-weight: bold">auto</span>;
-        {{"}"}}
-    {{"}"}}
-    {{"}"}}
-    </pre></td></tr></table></div>
+  {{"}"}}
+  </pre></td></tr></table></div>
 </ng-template>
     
